@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Delivery - Enhanced Menu</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+
+        h1 {
+            color: #4CAF50;
+        }
+
+        .restaurant-container {
+            display: flex;
+            gap: 20px;
+        }
+
+        .restaurant-card {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 300px;
+            text-align: center;
+            border-radius: 5px;
+            box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .restaurant-card:hover {
+            background-color: #e0f7fa;
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .menu-item {
+            text-align: left;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .menu-item:hover {
+            background-color: #ffecb3;
+        }
+
+        .menu-item.selected {
+            background-color: #ffd54f;
+        }
+
+        .summary {
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .summary h2 {
+            color: #4CAF50;
+        }
+    </style>
+    <script>
+        let selectedItems = []; // Tracks selected items
+        function toggleSelection(element, restaurant, menuItem) {
+            const item = `${restaurant} - ${menuItem}`;
+            if (selectedItems.includes(item)) {
+                // Unselect the item
+                selectedItems = selectedItems.filter(i => i !== item);
+                element.classList.remove('selected');
+            } else {
+                // Select the item
+                selectedItems.push(item);
+                element.classList.add('selected');
+            }
+            // Update order summary
+            updateOrderSummary();
+        }
+        function updateOrderSummary() {
+            const summaryDiv = document.getElementById('order-summary');
+            if (selectedItems.length === 0) {
+                summaryDiv.innerHTML = "<p>No items selected.</p>";
+            } else {
+                summaryDiv.innerHTML = `
+                <h2>Order Summary</h2>
+                <ul>
+                    ${selectedItems.map(item => `<li>${item}</li>`).join('')}
+                </ul>
+                `;
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <h1>Welcome to Food Delivery</h1>
+    <p>Select your desired food items from the restaurants below:</p>
+    <div class="restaurant-container">
+        <!-- Restaurant Card 1 -->
+        <div class="restaurant-card">
+            <h3>A1 Breakfast</h3>
+            <p>Delicious breakfast items:</p>
+            <div class="menu-item" onclick="toggleSelection(this, 'A1 Breakfast', 'Idly - ₹35')">
+                Idly <span style="float: right;">₹35</span>
+            </div>
+            <div class="menu-item" onclick="toggleSelection(this, 'A1 Breakfast', 'Poori - ₹40')">
+                Poori <span style="float: right;">₹40</span>
+            </div>
+            <div class="menu-item" onclick="toggleSelection(this, 'A1 Breakfast', 'Ragi Java - ₹25')">
+                Ragi Java <span style="float: right;">₹25</span>
+            </div>
+        </div>
+        <!-- Restaurant Card 2 -->
+        <div class="restaurant-card">
+            <h3>Dwithiya Restaurant</h3>
+            <p>Authentic Indian main courses:</p>
+            <div class="menu-item" onclick="toggleSelection(this, 'Dwithiya Restaurant', 'Rice - ₹50')">
+                Rice <span style="float: right;">₹50</span>
+            </div>
+            <div class="menu-item" onclick="toggleSelection(this, 'Dwithiya Restaurant', 'Roti - ₹45')">
+                Roti <span style="float: right;">₹45</span>
+            </div>
+            <div class="menu-item" onclick="toggleSelection(this, 'Dwithiya Restaurant', 'Dal Curry - ₹40')">
+                Dal Curry <span style="float: right;">₹40</span>
+            </div>
+        </div>
+        <!-- Restaurant Card 3 -->
+        <div class="restaurant-card">
+            <h3>Khaoji Restaurant</h3>
+            <p>Indulge in flavorful curries:</p>
+            <div class="menu-item" onclick="toggleSelection(this, 'Khaoji Restaurant', 'Paneer Butter Masala - ₹120')">
+                Paneer Butter Masala <span style="float: right;">₹120</span>
+            </div>
+            <div class="menu-item" onclick="toggleSelection(this, 'Khaoji Restaurant', 'Chicken Biryani - ₹150')">
+                Chicken Biryani <span style="float: right;">₹150</span>
+            </div>
+            <div class="menu-item" onclick="toggleSelection(this, 'Khaoji Restaurant', 'Tandoori Roti - ₹20')">
+                Tandoori Roti <span style="float: right;">₹20</span>
+            </div>
+        </div>
+    </div>
+
+    <div class="summary" id="order-summary">
+        <p>No items selected.</p>
+    </div>
+
+    <form action="/order" method="post">
+        <input type="hidden" name="order" id="hiddenOrder">
+        <button type="submit" onclick="document.getElementById('hiddenOrder').value = selectedItems.join(', ')">
+            Confirm Order
+        </button>
+    </form>
+</body>
+
+</html>

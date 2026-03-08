@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <script>
+        function demo(x) {
+            x.remove();
+        }
+    </script>
+    <style>
+        .myDiv1 {
+            border: 10px outset black;
+            background-color: grey;
+            text-align: center;
+        }
+
+        .myDiv2 {
+            border: 10px outset green;
+            background-color: lightgreen;
+            text-align: center;
+        }
+
+        .myDiv3 {
+            border: 10px outset red;
+            background-color: lightpink;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Click on boxes to remove an html element</h1>
+    <p id="p1"></p>
+
+    <div id="div1" class="myDiv1" onclick="demo(this)">
+        <h2>This is h2 element</h2>
+        <p>This is paragraph</p>
+        <p>Click anywhere on this box to make this DIV disappear</p>
+    </div>
+    <br>
+
+    <div id="div2" class="myDiv2" onclick="demo(this)">
+        <h2>This is h2 element</h2>
+        <p>This is paragraph</p>
+        <p>Click anywhere on this box to make this DIV disappear</p>
+    </div>
+    <br>
+
+    <div id="div3" class="myDiv3" onclick="demo(this)">
+        <h2>This is h2 element</h2>
+        <p>This is paragraph</p>
+        <p>Click anywhere on this box to make this DIV disappear</p>
+    </div>
+</body>
+
+</html>
