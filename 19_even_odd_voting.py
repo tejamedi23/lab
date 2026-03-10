@@ -1,12 +1,12 @@
-num=6
-age=20
+num=int(input("Enter number: "))
+age=int(input("Enter age: "))
 
 if num%2==0:
-    print("Even")
+    print("Even number")
 else:
-    print("Odd")
+    print("Odd number")
 
 if age>=18:
     print("Eligible to vote")
 else:
-    print("Not eligible")
+    print("Not eligible to vote")
